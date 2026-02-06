@@ -5,7 +5,7 @@
  * Description: Receive payments using the Network International Payment Solutions payments provider.
  * Author: Network International
  * Author URI: https://www.network.ae/en
- * Version: 1.3.3
+ * Version: 1.3.6
  * Requires at least: 6.0
  * Requires PHP: 8.0
  * Tested up to: 6.8.2
@@ -46,7 +46,7 @@ require_once "$f/vendor/autoload.php";
 use Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry;
 use Ngenius\NgeniusCommon\NgeniusOrderStatuses;
 
-define('NETWORK_INTERNATIONAL_NGENIUS_VERSION', '1.3.3'); // WRCS: DEFINED_VERSION.
+define('NETWORK_INTERNATIONAL_NGENIUS_VERSION', '1.3.6'); // WRCS: DEFINED_VERSION.
 define(
     'NETWORK_INTERNATIONAL_NGENIUS_URL',
     untrailingslashit(plugins_url(basename(plugin_dir_path(__FILE__)), basename(__FILE__)))
@@ -317,17 +317,17 @@ add_action('before_woocommerce_init', 'network_international_ngenius_declare_hpo
 /**
  * Check if the intl extension is loaded and display an admin notice if not.
  */
-function check_intl_extension() {
+function network_international_ngenius_check_intl_extension() {
     if (!extension_loaded('intl')) {
-        add_action('admin_notices', 'intl_extension_not_installed_notice');
+        add_action('admin_notices', 'network_international_ngenius_intl_extension_not_installed_notice');
     }
 }
-add_action('admin_init', 'check_intl_extension');
+add_action('admin_init', 'network_international_ngenius_check_intl_extension');
 
 /**
  * Display the admin notice.
  */
-function intl_extension_not_installed_notice() {
+function network_international_ngenius_intl_extension_not_installed_notice() {
     ?>
     <div class="notice notice-error is-dismissible">
         <p>
